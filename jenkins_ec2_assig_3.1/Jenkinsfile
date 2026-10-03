@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'master',
+                    url: 'https://github.com/Shantanumajan6/project'
+            }
+        }
+
+        stage('Build WAR') {
+            steps {
+                sh '''
+                echo "===== Building WAR ====="
+                mvn clean package
+                '''
+            }
+        }
+
+        stage('Deploy to Tomcat') {
+            steps {
+                sh '''
+                echo "===== Deploying to Tomcat ====="
+                sudo cp target/*.war /opt/tomcat/webapps/
+                sudo /opt/tomcat/bin/shutdown.sh || true
+                sudo /opt/tomcat/bin/startup.sh
+                '''
+            }
+        }
+
+        stage('Verify Deployment') {
+            steps {
+                sh '''
+                echo "===== Testing Website ====="
+                curl -I http://localhost:8081/LoginWebApp/
+                '''
+            }
+        }
+    }
+}
