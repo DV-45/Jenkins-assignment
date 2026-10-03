@@ -1,4 +1,4 @@
-# Assignment 3 – Multi-Version Website Deployment using Jenkins Pipeline
+# Assignment 2.2 – Multi-Version Website Deployment using Jenkins Pipeline
 
 ## 📌 Objective
 Automate deployment of three independent website versions using a single Jenkins Pipeline job with multiple stages.  
