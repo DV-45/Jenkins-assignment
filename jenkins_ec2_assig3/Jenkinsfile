@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/DV-45/Jenkins-assignment.git'
+            }
+        }
+
+        stage('Q1 Release') {
+            steps {
+                sh '''
+                mkdir -p /var/www/html/R1
+                cp -r jenkins_ec2_assig2/repo1/* /var/www/html/R1/
+                ls -la /var/www/html/R1
+                '''
+            }
+        }
+
+        stage('Q4.2 Patch') {
+            steps {
+                sh '''
+                mkdir -p /var/www/html/R2
+                cp -r jenkins_ec2_assig2/repo2/* /var/www/html/R2/
+                ls -la /var/www/html/R2
+                '''
+            }
+        }
+
+        stage('Q3.3 Bug Fix') {
+            steps {
+                sh '''
+                mkdir -p /var/www/html/R3
+                cp -r jenkins_ec2_assig2/repo3/* /var/www/html/R3/
+                ls -la /var/www/html/R3
+                '''
+            }
+        }
+    }
+}
